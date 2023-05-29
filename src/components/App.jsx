@@ -1,7 +1,11 @@
-import React from 'react';
+import Checklist from './Checklist';
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <Checklist />
+    </>
+  );
 };
 
 export default App;
