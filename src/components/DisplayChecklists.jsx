@@ -1,14 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSelectedChecklistID } from '../redux/eclSlice';
+import useGetChecklistGroup from '../hooks/useGetChecklistGroup';
 
 const DisplayChecklists = () => {
   const dispatch = useDispatch();
-  const { data, selectedIndexName } = useSelector((state) => state.ecl);
 
   // Find the index that matches the selectedIndex name
-  const checklistGroup = data.find(
-    (eachIndex) => eachIndex.indexName === selectedIndexName
-  )?.checklists;
+  const checklistGroup = useGetChecklistGroup();
 
   // Display each checklist title
   return checklistGroup.map((eachChecklist, i) => {
