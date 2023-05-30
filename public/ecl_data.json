@@ -4,7 +4,7 @@
     "checklists": [
       {
         "checklistID": "",
-        "checklist": "Power-On",
+        "checklistName": "Power-On",
         "status": "Not-Started",
         "items": [
           {
