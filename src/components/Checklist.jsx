@@ -1,24 +1,14 @@
-import { useSelector } from 'react-redux';
-import DisplayIndexName from './DisplayIndexName';
+import DisplayIndexNames from './DisplayIndexNames';
 import DisplayChecklists from './DisplayChecklists';
+import { useSelector } from 'react-redux';
 
 const Checklist = () => {
-  const { data } = useSelector((state) => state.ecl);
-
-  const RenderChecklist = () =>
-    data.map((eachIndexGroup, i) => {
-      const { indexName, checklists } = eachIndexGroup;
-      return (
-        <div key={i}>
-          <DisplayIndexName title={indexName} />
-          <DisplayChecklists checklists={checklists} />
-        </div>
-      );
-    });
+  const { selectedIndexName } = useSelector((state) => state.ecl);
 
   return (
     <>
-      <RenderChecklist />
+      <DisplayIndexNames />
+      {selectedIndexName && <DisplayChecklists />}
     </>
   );
 };
