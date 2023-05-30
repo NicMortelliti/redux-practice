@@ -1,18 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import DisplayIndexName from './DisplayIndexName';
+import DisplayChecklists from './DisplayChecklists';
 
 const Checklist = () => {
-  const [data, setData] = useState({});
-  const url = './ecl_data.json';
+  const { data } = useSelector((state) => state.ecl);
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+  const RenderChecklist = () =>
+    data.map((eachIndexGroup, i) => {
+      const { indexName, checklists } = eachIndexGroup;
+      return (
+        <div key={i}>
+          <DisplayIndexName title={indexName} />
+          <DisplayChecklists checklists={checklists} />
+        </div>
+      );
+    });
 
-  const stringifiedData = JSON.stringify(data, undefined, 2);
-
-  return <>{stringifiedData}</>;
+  return (
+    <>
+      <RenderChecklist />
+    </>
+  );
 };
 
 export default Checklist;
