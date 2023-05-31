@@ -1,21 +1,22 @@
-import { useDispatch } from 'react-redux';
-import useGetChecklistItems from '../hooks/useGetChecklistItems';
+import { useDispatch, useSelector } from 'react-redux';
+import useGetChildren from '../hooks/useGetChildren';
 import { toggleChecklistItemStatus } from '../redux/eclSlice';
 
 const DisplayChecklistItems = () => {
   const dispatch = useDispatch();
-  const checklistItems = useGetChecklistItems();
+  const { selectedSubIndexObj } = useSelector((state) => state.ecl);
+  const checklistItems = useGetChildren(selectedSubIndexObj);
 
   return checklistItems.map((eachChecklistItem, i) => {
-    const { challenge, response, ID, completed } = eachChecklistItem;
+    const { text, id, completed } = eachChecklistItem;
     const active = completed ? 'active' : '';
 
     return (
       <p
         key={i}
         className={active}
-        onClick={() => dispatch(toggleChecklistItemStatus(ID))}>
-        {challenge} {response}
+        onClick={() => dispatch(toggleChecklistItemStatus(id))}>
+        {text}
       </p>
     );
   });

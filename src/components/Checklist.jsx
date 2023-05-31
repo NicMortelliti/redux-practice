@@ -1,14 +1,14 @@
-import DisplayIndexNames from './DisplayIndexNames';
-import DisplayChecklists from './DisplayChecklists';
+import DisplayIndexes from './DisplayIndexes';
+import DisplaySubIndexes from './DisplaySubIndexes';
 import { useSelector } from 'react-redux';
 
 const Checklist = () => {
-  const { selectedIndexName } = useSelector((state) => state.ecl);
+  const { selectedIndexObj } = useSelector((state) => state.ecl);
 
   return (
     <>
-      <DisplayIndexNames />
-      {selectedIndexName && <DisplayChecklists />}
+      <DisplayIndexes />
+      {selectedIndexObj && <DisplaySubIndexes />}
     </>
   );
 };

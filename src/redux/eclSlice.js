@@ -1,98 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   data: [],
-  selectedIndexName: '',
-  selectedChecklistID: '',
-};
-
-const generateUUID = (data) =>
-  data.map((eachIndex) => ({
-    ...eachIndex,
-    checklists: eachIndex.checklists.map((eachChecklist) => ({
-      ...eachChecklist,
-      ID: uuidv4(),
-      status: 'Not-Started',
-      items: eachChecklist.items.map((eachItem) => ({
-        ...eachItem,
-        ID: uuidv4(),
-        completed: false,
-      })),
-    })),
-  }));
-
-const toggleStatus = (state, itemID) => {
-  console.log(itemID);
-  const { data, selectedIndexName, selectedChecklistID } = state;
-
-  const itemsReducer = (items) => {
-    return items.map((eachItem) => {
-      if (eachItem.ID !== itemID) return eachItem;
-      return {
-        ...eachItem,
-        completed: !eachItem.completed,
-      };
-    });
-  };
-
-  const checklistsReducer = (checklists) => {
-    return checklists.map((eachChecklist) => {
-      if (eachChecklist.ID !== selectedChecklistID) return eachChecklist;
-      return {
-        ...eachChecklist,
-        items: itemsReducer(eachChecklist.items),
-      };
-    });
-  };
-
-  const indexReducer = (data) => {
-    return data.map((eachIndex) => {
-      if (eachIndex.indexName !== selectedIndexName) return eachIndex;
-      return {
-        ...eachIndex,
-        checklists: checklistsReducer(eachIndex.checklists),
-      };
-    });
-  };
-
-  return indexReducer(data);
+  selectedIndexObj: '',
+  selectedSubIndexObj: '',
 };
 
 export const eclSlice = createSlice({
   name: 'ecl',
   initialState,
   reducers: {
-    setChecklistData: (state, action) => {
-      const modifiedData = generateUUID(action.payload);
-      return {
-        ...state,
-        data: modifiedData,
-      };
-    },
-    setSelectedIndexName: (state, action) => ({
+    setChecklistData: (state, action) => ({
       ...state,
-      selectedIndexName: action.payload,
-      selectedChecklistID: initialState.selectedChecklistID,
+      data: action.payload,
     }),
-    setSelectedChecklistID: (state, action) => ({
+    setSelectedIndexObj: (state, action) => ({
       ...state,
-      selectedChecklistID: action.payload,
+      selectedIndexObj: action.payload,
+      selectedSubIndexObj: initialState.selectedSubIndexObj,
+    }),
+    setSelectedSubIndexObj: (state, action) => ({
+      ...state,
+      selectedSubIndexObj: action.payload,
     }),
     toggleChecklistItemStatus: (state, action) => {
-      const modifiedData = toggleStatus(state, action.payload);
-      return {
-        ...state,
-        data: modifiedData,
-      };
+      const id = action.payload;
+      const obj = state.data.find((obj) => obj.id === id);
+      if (obj) {
+        obj.completed = !obj.completed;
+      }
     },
   },
 });
 
 export const {
   setChecklistData,
-  setSelectedIndexName,
-  setSelectedChecklistID,
+  setSelectedIndexObj,
+  setSelectedSubIndexObj,
   toggleChecklistItemStatus,
 } = eclSlice.actions;
 

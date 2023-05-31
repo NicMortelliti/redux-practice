@@ -1,4 +1,4 @@
-import useGetChecklistGroup from './useGetChecklistGroup';
+import useGetChecklistGroup from './useGetSubIndexes';
 import { useSelector } from 'react-redux';
 
 const useGetChecklistItems = () => {

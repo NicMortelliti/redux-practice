@@ -1,7 +1,7 @@
 import Checklist from './Checklist';
-import { useFetchData } from '../hooks/fetchers';
+import { useFetchData } from '../hooks/useFetchData';
 
-const url = './ecl_data.json';
+const url = './ecl_data2.json';
 
 const App = () => {
   useFetchData(url);
