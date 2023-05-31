@@ -13,6 +13,7 @@ const generateUUID = (data) =>
     checklists: eachIndex.checklists.map((eachChecklist) => ({
       ...eachChecklist,
       ID: uuidv4(),
+      status: 'Not-Started',
       items: eachChecklist.items.map((eachItem) => ({
         ...eachItem,
         ID: uuidv4(),
@@ -72,6 +73,7 @@ export const eclSlice = createSlice({
     setSelectedIndexName: (state, action) => ({
       ...state,
       selectedIndexName: action.payload,
+      selectedChecklistID: initialState.selectedChecklistID,
     }),
     setSelectedChecklistID: (state, action) => ({
       ...state,

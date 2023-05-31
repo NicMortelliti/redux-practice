@@ -3,17 +3,37 @@
     "indexName": "normal",
     "checklists": [
       {
-        "ID": "",
         "checklistName": "Power-On",
-        "status": "Not-Started",
         "items": [
           {
-            "ID": "",
             "challenge": "FUEL PUMP",
             "response": "ON",
             "sensed": {
               "simVar": "TURB ENG IGNITION",
               "unit": "bool",
+              "value": false
+            }
+          },
+          {
+            "challenge": "UNILATERAL PHASE DETRACTOR",
+            "response": "ROTATED",
+            "sensed": {
+              "simVar": "",
+              "unit": "",
+              "value": false
+            }
+          }
+        ]
+      },
+      {
+        "checklistName": "Shut-Down",
+        "items": [
+          {
+            "challenge": "TURBO ENCABULATOR",
+            "response": "OFF",
+            "sensed": {
+              "simVar": "",
+              "unit": "",
               "value": false
             }
           }

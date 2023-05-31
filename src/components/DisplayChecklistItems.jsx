@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useGetChecklistItems from '../hooks/useGetChecklistItems';
-import useGetChecklistItemStatus from '../hooks/useGetChecklistItemStatus';
 import { toggleChecklistItemStatus } from '../redux/eclSlice';
 
 const DisplayChecklistItems = () => {
@@ -9,12 +7,8 @@ const DisplayChecklistItems = () => {
   const checklistItems = useGetChecklistItems();
 
   return checklistItems.map((eachChecklistItem, i) => {
-    const { challenge, response, ID } = eachChecklistItem;
-    const active = useGetChecklistItemStatus(ID);
-
-    useEffect(() => {
-      const status = useGetChecklistItemStatus(ID);
-    }, [ID]);
+    const { challenge, response, ID, completed } = eachChecklistItem;
+    const active = completed ? 'active' : '';
 
     return (
       <p
