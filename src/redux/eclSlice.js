@@ -16,9 +16,47 @@ const generateUUID = (data) =>
       items: eachChecklist.items.map((eachItem) => ({
         ...eachItem,
         ID: uuidv4(),
+        completed: false,
       })),
     })),
   }));
+
+const toggleStatus = (state, itemID) => {
+  console.log(itemID);
+  const { data, selectedIndexName, selectedChecklistID } = state;
+
+  const itemsReducer = (items) => {
+    return items.map((eachItem) => {
+      if (eachItem.ID !== itemID) return eachItem;
+      return {
+        ...eachItem,
+        completed: !eachItem.completed,
+      };
+    });
+  };
+
+  const checklistsReducer = (checklists) => {
+    return checklists.map((eachChecklist) => {
+      if (eachChecklist.ID !== selectedChecklistID) return eachChecklist;
+      return {
+        ...eachChecklist,
+        items: itemsReducer(eachChecklist.items),
+      };
+    });
+  };
+
+  const indexReducer = (data) => {
+    return data.map((eachIndex) => {
+      if (eachIndex.indexName !== selectedIndexName) return eachIndex;
+      return {
+        ...eachIndex,
+        checklists: checklistsReducer(eachIndex.checklists),
+      };
+    });
+  };
+
+  return indexReducer(data);
+};
 
 export const eclSlice = createSlice({
   name: 'ecl',
@@ -39,6 +77,13 @@ export const eclSlice = createSlice({
       ...state,
       selectedChecklistID: action.payload,
     }),
+    toggleChecklistItemStatus: (state, action) => {
+      const modifiedData = toggleStatus(state, action.payload);
+      return {
+        ...state,
+        data: modifiedData,
+      };
+    },
   },
 });
 
@@ -46,6 +91,7 @@ export const {
   setChecklistData,
   setSelectedIndexName,
   setSelectedChecklistID,
+  toggleChecklistItemStatus,
 } = eclSlice.actions;
 
 export default eclSlice.reducer;
