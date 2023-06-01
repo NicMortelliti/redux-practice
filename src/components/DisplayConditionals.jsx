@@ -5,7 +5,6 @@ import { toggleChecklistItemStatus } from '../redux/eclSlice';
 const DisplayConditionals = ({ obj }) => {
   const dispatch = useDispatch();
   const conditionalChildren = useGetChildren(obj);
-  const { children_ids } = obj;
   const { data } = useSelector((state) => state.ecl);
 
   const getIdOfNonSelectedConditional = (selectedId) => {
