@@ -7,30 +7,22 @@ const DisplayConditionals = ({ obj }) => {
   const conditionalChildren = useGetChildren(obj);
   const { data } = useSelector((state) => state.ecl);
 
-  const getIdOfNonSelectedConditional = (selectedId) => {
-    // We need to ensure only one radio button is selected.
-    // So maybe we grab the id of the conditional item that is
-    // not selected and make sure it's deselected (false)
-    const notSelectedIds = obj.children_ids.filter(
-      (eachChild) => eachChild !== selectedId
-    );
-
-    return notSelectedIds;
-  };
+  const getIdsOfNonSelectedConditional = (selectedId) =>
+    obj.children_ids.filter((eachChild) => eachChild !== selectedId);
 
   const handleToggle = (selectedId) => {
     dispatch(toggleChecklistItemStatus(selectedId));
 
     // Set other radio buttons to false
-    const notSelectedIds = getIdOfNonSelectedConditional(selectedId);
+    const notSelectedIds = getIdsOfNonSelectedConditional(selectedId);
     notSelectedIds.map((eachNotSelectedId) => {
+      const objWithThisId = data.find(
+        (eachObj) => eachObj.id === eachNotSelectedId
+      );
+
       // Find only the id's of the other radio buttons that are set to true
-      if (
-        data.find((eachObj) => eachObj.id === eachNotSelectedId).completed ===
-        true
-      ) {
+      objWithThisId.completed &&
         dispatch(toggleChecklistItemStatus(eachNotSelectedId));
-      }
     });
   };
 
