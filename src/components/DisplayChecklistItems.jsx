@@ -11,7 +11,6 @@ const DisplayChecklistItems = () => {
 
   return checklistItems.map((eachChecklistItem, i) => {
     const { id, text, type, completed } = eachChecklistItem;
-
     const active = completed ? 'active' : '';
 
     return (
@@ -21,7 +20,7 @@ const DisplayChecklistItems = () => {
           onClick={() => dispatch(toggleChecklistItemStatus(id))}>
           {text}
         </p>
-        {type === 'conditional_parent' && (
+        {(type === 'conditional_parent' || 'msli_parent') && (
           <DisplayConditionals obj={eachChecklistItem} />
         )}
       </React.Fragment>

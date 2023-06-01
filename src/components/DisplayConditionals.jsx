@@ -7,6 +7,8 @@ const DisplayConditionals = ({ obj }) => {
   const conditionalChildren = useGetChildren(obj);
   const { data } = useSelector((state) => state.ecl);
 
+  console.log(obj.type);
+
   const getIdsOfNonSelectedConditional = (selectedId) =>
     obj.children_ids.filter((eachChild) => eachChild !== selectedId);
 
