@@ -1,21 +1,15 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedSubIndexObj } from '../redux/eclSlice';
-import DisplayChecklistItems from './DisplayChecklistItems';
+import { useSelector } from 'react-redux';
 import useGetChildren from '../hooks/useGetChildrenIds';
-import useGetObjectById from '../helpers/getObjectById';
-import itemDirector from '../helpers/ItemDirector';
+import ItemDirector from '../helpers/ItemDirector';
 
 const DisplaySubIndexes = () => {
-  const dispatch = useDispatch();
-  const { selectedIndexObj, selectedSubIndexObj } = useSelector(
-    (state) => state.ecl
-  );
+  const { selectedIndexId } = useSelector((state) => state.ecl);
+  const subIndexIds = useGetChildren(selectedIndexId);
+  console.log(`SubIndexes: ${subIndexIds}`)
+  const RenderButtons = () =>
+    subIndexIds.map((id) => <ItemDirector key={id} id={id} />);
 
-  const subIndexIds = useGetChildren(selectedIndexObj);
-
-  // Pass each of the child ids to the director
-  return subIndexIds.map((eachChildItem) => itemDirector(eachChildItem));
+  return <RenderButtons />;
 };
 
 export default DisplaySubIndexes;

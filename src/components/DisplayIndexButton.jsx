@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedIndexObj } from '../redux/eclSlice';
+import { setSelectedIndexId } from '../redux/eclSlice';
 
 const DisplayIndexButton = ({ obj }) => {
   const dispatch = useDispatch();
-  const { selectedIndexObj } = useSelector((state) => state.ecl);
+  const { selectedIndexId } = useSelector((state) => state.ecl);
   const { id, text } = obj;
-  const active = selectedIndexObj.text === text ? 'active' : '';
+  const active = selectedIndexId === id ? 'active' : '';
 
   return (
-    <button
-      className={active}
-      onClick={() => dispatch(setSelectedIndexObj(id))}>
-      {text}
-    </button>
+    <>
+      <button
+        className={active}
+        onClick={() => dispatch(setSelectedIndexId(id))}>
+        {text}
+      </button>
+    </>
   );
 };
 

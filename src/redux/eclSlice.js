@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   data: [],
-  selectedIndexObj: '',
-  selectedSubIndexObj: '',
+  selectedIndexId: '',
+  selectedSubIndexId: '',
 };
 
 export const eclSlice = createSlice({
@@ -14,14 +14,14 @@ export const eclSlice = createSlice({
       ...state,
       data: action.payload,
     }),
-    setSelectedIndexObj: (state, action) => ({
+    setSelectedIndexId: (state, action) => ({
       ...state,
-      selectedIndexObj: action.payload,
-      selectedSubIndexObj: initialState.selectedSubIndexObj,
+      selectedIndexId: action.payload,
+      selectedSubIndexId: initialState.selectedSubIndexId,
     }),
-    setSelectedSubIndexObj: (state, action) => ({
+    setSelectedSubIndexId: (state, action) => ({
       ...state,
-      selectedSubIndexObj: action.payload,
+      selectedSubIndexId: action.payload,
     }),
     toggleChecklistItemStatus: (state, action) => {
       const id = action.payload;
@@ -35,8 +35,8 @@ export const eclSlice = createSlice({
 
 export const {
   setChecklistData,
-  setSelectedIndexObj,
-  setSelectedSubIndexObj,
+  setSelectedIndexId,
+  setSelectedSubIndexId,
   toggleChecklistItemStatus,
 } = eclSlice.actions;
 
