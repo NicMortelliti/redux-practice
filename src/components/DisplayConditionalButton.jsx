@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import ItemDirector from '../helpers/ItemDirector';
 import { toggleChecklistItemStatus } from '../redux/eclSlice';
 
 const DisplayConditionalButton = ({ obj, parentId }) => {
-  const { id, children_ids, completed, text } = obj;
+  const { id, completed, text } = obj;
   const { data } = useSelector((state) => state.ecl);
+  const dispatch = useDispatch();
 
   // Get the complete object that matches the parents id
   const parentObj = data.find((eachItem) => eachItem.id === parentId);
-
-  const dispatch = useDispatch();
 
   const handleToggle = (selectedId) => {
     dispatch(toggleChecklistItemStatus(selectedId));
@@ -26,10 +24,6 @@ const DisplayConditionalButton = ({ obj, parentId }) => {
     });
   };
 
-  // Render child items if this item is active
-  const RenderChildren = () =>
-    children_ids.map((id) => <ItemDirector key={id} id={id} />);
-
   const active = completed ? 'active' : '';
 
   return (
@@ -37,7 +31,6 @@ const DisplayConditionalButton = ({ obj, parentId }) => {
       <button key={id} className={active} onClick={() => handleToggle(id)}>
         {text}
       </button>
-      {active && <RenderChildren />}
     </>
   );
 };
