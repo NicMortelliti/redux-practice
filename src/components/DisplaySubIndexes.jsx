@@ -1,13 +1,15 @@
 import { useSelector } from 'react-redux';
-import useGetChildren from '../hooks/useGetChildrenIds';
 import ItemDirector from '../helpers/ItemDirector';
 
 const DisplaySubIndexes = () => {
-  const { selectedIndexId } = useSelector((state) => state.ecl);
-  const subIndexIds = useGetChildren(selectedIndexId);
-  console.log(`SubIndexes: ${subIndexIds}`)
+  const { selectedIndexId, data } = useSelector((state) => state.ecl);
+
+  // Get sub index id's for selected index
+  const obj = data.find((eachItem) => eachItem.id === selectedIndexId);
+  const { children_ids } = obj;
+
   const RenderButtons = () =>
-    subIndexIds.map((id) => <ItemDirector key={id} id={id} />);
+    children_ids.map((id) => <ItemDirector key={id} id={id} />);
 
   return <RenderButtons />;
 };

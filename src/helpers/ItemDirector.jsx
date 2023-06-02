@@ -1,14 +1,15 @@
-import DisplayChecklistItem from '../components/DisplayChecklistItem';
-import DisplayConditionals from '../components/DisplayConditionals';
-import getObjectById from './getObjectById';
+import DisplayChecklistItemButton from '../components/DisplayChecklistItemButton';
+import DisplayConditionalButton from '../components/DisplayConditionalButton';
 import DisplayConditionalParent from '../components/DisplayConditionalParent';
 import DisplayIndexButton from '../components/DisplayIndexButton';
 import DisplaySubIndexButton from '../components/DisplaySubIndexButton';
+import { useSelector } from 'react-redux';
 
-const ItemDirector = ({ id }) => {
-  // Go get the complete object that matches this id
-  const obj = getObjectById(id);
-  console.log(`Director: ${id} - ${obj.type}`);
+const ItemDirector = ({ id, parentId }) => {
+  const { data } = useSelector((state) => state.ecl);
+
+  // Get the complete object that matches this id
+  const obj = data.find((eachItem) => eachItem.id === id);
 
   switch (obj.type) {
     case 'index':
@@ -18,13 +19,13 @@ const ItemDirector = ({ id }) => {
       return <DisplaySubIndexButton obj={obj} />;
 
     case 'checklist':
-      return <DisplayChecklistItem obj={obj} />;
+      return <DisplayChecklistItemButton obj={obj} />;
 
     case 'conditional_parent':
       return <DisplayConditionalParent obj={obj} />;
 
     case 'conditional_child':
-      return <DisplayConditionals obj={obj} />;
+      return <DisplayConditionalButton obj={obj} parentId={parentId} />;
 
     default:
       break;
