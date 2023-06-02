@@ -22,9 +22,11 @@ const ItemDirector = ({ id, parentId }) => {
       return <DisplayChecklistItemButton obj={obj} />;
 
     case 'conditional_parent':
+    case 'msli_parent':
       return <DisplayConditionalParent obj={obj} />;
 
     case 'conditional_child':
+    case 'msli_child':
       return <DisplayConditionalButton obj={obj} parentId={parentId} />;
 
     default:

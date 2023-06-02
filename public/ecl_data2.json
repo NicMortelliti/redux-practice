@@ -137,7 +137,7 @@
   {
     "id": 10,
     "children_ids": [11, 12, 13, 14, 15],
-    "text": "This is an MSLI",
+    "text": "MSLI Parent",
     "type": "msli_parent",
     "cas_message": "",
     "latchable": "",
@@ -152,7 +152,7 @@
   {
     "id": 11,
     "children_ids": [16],
-    "text": "This is an MSLI child 1",
+    "text": "MSLI 1",
     "type": "msli_child",
     "cas_message": "",
     "latchable": "",
@@ -167,7 +167,7 @@
   {
     "id": 12,
     "children_ids": [],
-    "text": "This is an MSLI child 2",
+    "text": "MSLI 2",
     "type": "msli_child",
     "cas_message": "",
     "latchable": "",
@@ -182,7 +182,7 @@
   {
     "id": 13,
     "children_ids": [],
-    "text": "This is an MSLI child 3",
+    "text": "MSLI 3",
     "type": "msli_child",
     "cas_message": "",
     "latchable": "",
@@ -197,7 +197,7 @@
   {
     "id": 14,
     "children_ids": [],
-    "text": "This is an MSLI child 4",
+    "text": "MSLI 4",
     "type": "msli_child",
     "cas_message": "",
     "latchable": "",
@@ -212,7 +212,7 @@
   {
     "id": 15,
     "children_ids": [],
-    "text": "This is an MSLI child 5",
+    "text": "MSLI 5",
     "type": "msli_child",
     "cas_message": "",
     "latchable": "",
