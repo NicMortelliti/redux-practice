@@ -1,13 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import useGetChildren from '../hooks/useGetChildren';
+import useGetChildren from '../hooks/useGetChildrenIds';
 import { toggleChecklistItemStatus } from '../redux/eclSlice';
 
 const DisplayConditionals = ({ obj }) => {
   const dispatch = useDispatch();
   const conditionalChildren = useGetChildren(obj);
   const { data } = useSelector((state) => state.ecl);
-
-  console.log(obj.type);
 
   const getIdsOfNonSelectedConditional = (selectedId) =>
     obj.children_ids.filter((eachChild) => eachChild !== selectedId);

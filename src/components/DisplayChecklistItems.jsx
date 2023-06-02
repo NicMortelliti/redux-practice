@@ -1,30 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
-import useGetChildren from '../hooks/useGetChildren';
-import { toggleChecklistItemStatus } from '../redux/eclSlice';
-import DisplayConditionals from '../components/DisplayConditionals';
-import React from 'react';
+import useGetChildrenIds from '../hooks/useGetChildrenIds';
+import ItemDirector from '../helpers/ItemDirector';
+import { useSelector } from 'react-redux';
 
 const DisplayChecklistItems = () => {
-  const dispatch = useDispatch();
   const { selectedSubIndexObj } = useSelector((state) => state.ecl);
-  const checklistItems = useGetChildren(selectedSubIndexObj);
+  const checklistItemIds = useGetChildrenIds(selectedSubIndexObj);
 
-  return checklistItems.map((eachChecklistItem, i) => {
-    const { id, text, type, completed } = eachChecklistItem;
-    const active = completed ? 'active' : '';
-
-    return (
-      <React.Fragment key={i}>
-        <p
-          className={active}
-          onClick={() => dispatch(toggleChecklistItemStatus(id))}>
-          {text}
-        </p>
-        {(type === 'conditional_parent' || 'msli_parent') && (
-          <DisplayConditionals obj={eachChecklistItem} />
-        )}
-      </React.Fragment>
-    );
+  return checklistItemIds.map((id) => {
+    return <ItemDirector key={id} id={id} />;
   });
 };
 

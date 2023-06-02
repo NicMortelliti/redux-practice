@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 
-const useGetIndexes = () => {
+const useGetIndexIds = () => {
   const { data } = useSelector((state) => state.ecl);
   const indexes = data.filter((obj) => obj.type === 'index');
-  return indexes;
+  const indexIds = indexes.map((eachIndex) => eachIndex.id);
+  return indexIds;
 };
 
-export default useGetIndexes;
+export default useGetIndexIds;
